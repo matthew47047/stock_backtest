@@ -1,6 +1,7 @@
 param(
     [string]$Ticker,
     [string[]]$Tickers,
+    [double[]]$Weights,
     [Parameter(Mandatory = $true)]
     [string]$Start,
     [Parameter(Mandatory = $true)]
@@ -38,6 +39,11 @@ if ($Tickers) {
         throw "Tickers is empty after normalization."
     }
     $argsList += @("--tickers", $joinedTickers)
+
+    if ($Weights) {
+        $joinedWeights = ($Weights | ForEach-Object { "$_" }) -join ","
+        $argsList += @("--weights", $joinedWeights)
+    }
 }
 elseif ($Ticker) {
     $argsList += @("--ticker", $Ticker)

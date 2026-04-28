@@ -27,7 +27,7 @@ PowerShell 一鍵版（自動建立 `.venv` + 安裝套件 + 執行）：
 .\run_backtest.ps1 -Ticker 2330 -Start 2024-01-01 -End 2025-01-01 -Capital 1000000
 ```
 
-多檔（平均分配資金）：
+多檔（等權重）：
 
 ```bash
 python main.py --tickers 2330,2317,2454 --start 2024-01-01 --end 2025-01-01 --capital 1000000
@@ -39,12 +39,25 @@ PowerShell 一鍵版（多檔）：
 .\run_backtest.ps1 -Tickers 2330,2317,2454 -Start 2024-01-01 -End 2025-01-01 -Capital 1000000
 ```
 
+多檔（自訂資金權重）：
+
+```bash
+python main.py --tickers 2330,2317,2454 --weights 0.5,0.3,0.2 --start 2024-01-01 --end 2025-01-01 --capital 1000000
+```
+
+PowerShell 一鍵版（自訂資金權重）：
+
+```powershell
+.\run_backtest.ps1 -Tickers 2330,2317,2454 -Weights 0.5,0.3,0.2 -Start 2024-01-01 -End 2025-01-01 -Capital 1000000
+```
+
 參數說明：
 
 - `--ticker`：股票代號，例 `2330`（預設會轉成 `2330.TW`）
 - `--tickers`：多檔股票代號（逗號分隔）
 - `--start` / `--end`：回測日期範圍（YYYY-MM-DD）
 - `--capital`：啟動資金
+- `--weights`：多檔資金權重（逗號分隔，不提供則預設等權重；會自動正規化）
 - `--short-window` / `--long-window`：策略均線參數
 
 ## 3) 注意事項
